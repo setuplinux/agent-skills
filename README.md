@@ -6,7 +6,7 @@ Reusable skills for AI agents and command-line assistants.
 
 | Skill | Purpose | Status |
 |---|---|---|
-| `skills/hpe-vme-mcp` | Read-only HPE VM Essentials MCP discovery and inventory | v0.1 draft |
+| `skills/hpe-vm` | HPE VM Essentials / Morpheus VME agent onboarding: MCP for 9.x+, REST API fallback, SSH last resort | v0.3 draft |
 
 ## Design rules
 
