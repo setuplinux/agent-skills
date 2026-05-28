@@ -5,8 +5,8 @@ description: Use when safely onboarding an agent to HPE VM Essentials / Morpheus
 
 # HPE VM Essentials Agent Onboarding Skill
 
-Version: 0.3 draft
-Default mode: read-only onboarding and discovery
+Version: 0.4 draft
+Default mode: read-only onboarding and discovery; exact-approval mutation testing only
 Audience: AI agents, coding agents, CLI assistants, and technical operators
 
 ## Purpose
@@ -100,6 +100,21 @@ Use MCP first only when the environment is known or reasonably discovered to be 
 6. If MCP is unavailable, disabled, incomplete, or ambiguous, fall back to REST for read-only checks.
 
 Do not invent MCP tool names. If the client cannot list tools or inspect tool schemas, stop and report MCP as unavailable or insufficient for safe onboarding.
+
+### Observed MCP write-capability notes
+
+When exact user approval is granted for a lab VM, MCP can expose and execute real change-bearing tools. Verify each tool with schema/details before calling it, and record the process or result IDs for follow-up.
+
+Observed VME/Morpheus 9.x-style tool patterns:
+
+| Capability | Tool pattern | Method/path shape | Notes |
+|---|---|---|---|
+| Create VM | `create_instance` | `POST /api/instances` | VM provisioning can work through MCP when the payload is based on discovered layout, plan, cloud/group, network, and image IDs. |
+| Instance snapshot | `snapshot_instance` | `PUT /api/instances/{id}/snapshot` | Returns success plus process IDs. Verify with `get_instance_snapshots` until the snapshot reaches a terminal status such as `complete`. |
+| Instance backup | `backup_instance` | `PUT /api/instances/{id}/backup` | May create a backup configuration/job and a backup result. Verify with `get_instance_backups` or backup result/job list tools until progress is clear. |
+| Extra storage | `resize_instance`, `create_storage_volume`, server volume attach tools | varies | Schemas may be underspecified and failures may return generic messages such as `Looks like the server threw a gasket` or `error saving volume`. Treat this as MCP/API insufficiency, not proof storage is impossible. Capture the exact payload shape attempted and fall back to documented REST/UI only with approval. |
+
+Storage-specific caveat: generated MCP storage tools may point at paths that differ from working REST paths. If a datastore or storage-volume MCP tool fails, verify the tool's `apiPath`, then use read-only REST discovery to distinguish a bad MCP wrapper/path from an absent product capability.
 
 ## REST API fallback path
 
