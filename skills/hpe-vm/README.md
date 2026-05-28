@@ -3,7 +3,7 @@
 This skill helps AI agents safely onboard to HPE VM Essentials / Morpheus VME for read-only discovery, smoke testing, and capability mapping.
 It is written for Claude, Codex-style agents, OpenClaw/Hermes-style agents, generic CLI assistants, and technical operators.
 
-Use [`SKILL.md`](./SKILL.md) as the agent-facing source of truth.
+Use [`SKILL.md`](./SKILL.md) as the agent-facing source of truth. Use [`MCP_FUNCTION_STATUS.md`](./MCP_FUNCTION_STATUS.md) for the lab-validated table of MCP functions that worked, failed, or still need validation.
 
 ## Status
 
