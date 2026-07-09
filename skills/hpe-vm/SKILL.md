@@ -124,6 +124,7 @@ Rules:
 
 - Prefer a read-only or least-privilege operational account.
 - Do not ask for private keys, passwords, or one-time codes in chat.
+- In runbooks and customer-facing examples, show commands as if the operator is already on the target host. Do not include SSH wrapper commands, credential paths, or host loops; spell out that the same command block should be run on each relevant host.
 - Confirm the exact host and purpose before connecting.
 - Prefer bounded, read-only commands that identify product/version, service status, or recent logs.
 - Do not run service restarts, package changes, database writes, host reconfiguration, migration commands, cleanup commands, or direct state changes without explicit mutation approval.
