@@ -144,6 +144,43 @@ Choose the narrowest tests supported by the available access method:
 
 If a test requires unknown endpoints, unknown tool names, or elevated permissions, mark it blocked instead of guessing.
 
+## HPE Clustered Datastore / GFS2 troubleshooting
+
+Use this section when the VME environment uses HPE Clustered Datastore, shared block storage, GFS2, DLM, iSCSI, or multipath. Prefer MCP first, REST second, and SSH only when the approved question cannot be answered through the control plane.
+
+Layer the investigation instead of jumping straight to filesystem repair:
+
+1. Product/version and cluster layout.
+2. Control-plane status: cluster, hosts, datastores, VMs, alerts, tasks, events.
+3. Host quorum: Corosync node count and quorate state.
+4. Locking: DLM lockspace membership for the GFS2 datastore.
+5. Filesystem: GFS2 mount present on every expected host.
+6. Storage transport: iSCSI sessions or equivalent shared-block transport.
+7. Multipath: same shared WWID visible on every expected host, paths active/ready/running.
+8. Libvirt: storage pool active and VM disks actually placed on the datastore.
+9. Workload: guest VM power state, reachability, and safe application check.
+
+Copy/paste SSH fallback health gate, only after SSH is approved:
+
+```bash
+corosync-quorumtool | egrep 'Nodes:|Quorate:'
+dlm_tool ls -n
+findmnt -t gfs2
+iscsiadm -m session
+multipath -ll
+virsh pool-list --all
+virsh list --all --title
+systemctl --no-pager status corosync dlm morpheus-morphd multipathd iscsid libvirtd
+```
+
+Field cautions:
+
+- Pacemaker/PCS may be inactive or masked on newer HVM cluster layouts where Morpheus Agent owns HA; do not call that a failure without confirming the expected layout.
+- Do not use `systemctl stop corosync` as a casual reversible test on a node with active GFS2. It can strand DLM/GFS2 lockspaces or leave unmounts stuck in uninterruptible sleep, requiring node-level recovery.
+- A GUI can lag lower-layer truth. Time both directions: first CLI/workload symptom, first GUI symptom, first CLI/workload recovery, and first GUI clear.
+- If the VME appliance VM is down, the REST/API and GUI may be unavailable even while host-level quorum/storage is healthy. Recover through the managed control plane when available; use host-side `virsh start` only when explicitly approved as an emergency or lab recovery path.
+- Do not proceed to the next failure test until quorum, DLM, GFS2 mount, transport sessions, multipath, libvirt pool, workload state, and control-plane/API/GUI status are all green or the remaining GUI lag is deliberately recorded.
+
 ## VME Agent Onboarding Result
 
 Environment:
