@@ -5,7 +5,7 @@ Independent, community-authored guidance for AI agents working with HPE VM Essen
 The portable Agent Skills package is this directory:
 
 ```text
-skills/hpe-vm/
+skills/hpe-vme/
 ├── SKILL.md
 ├── README.md
 └── references/

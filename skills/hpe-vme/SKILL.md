@@ -1,5 +1,5 @@
 ---
-name: hpe-vm
+name: hpe-vme
 description: Use when an agent is assisting with HPE VM Essentials, Morpheus VM Essentials, VME/HVM appliances, clusters, hosts, virtual machines, storage, networking, migrations, public-source research, operator-provided evidence, health checks, MCP, REST API access, or incident troubleshooting.
 ---
 
