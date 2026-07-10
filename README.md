@@ -8,7 +8,7 @@ These are community-authored field guides. They are not official vendor document
 
 | Skill | Purpose | Status |
 |---|---|---|
-| [`skills/hpe-vm`](./skills/hpe-vm/) | Portable VME agent field guide: safe onboarding, MCP/REST/approved SSH discovery, cross-layer incident triage, clustered-storage diagnostics, and controlled recovery | field draft |
+| [`skills/hpe-vm`](./skills/hpe-vm/) | Portable VME agent field guide: web research/evidence analysis, safe onboarding, MCP/REST/approved SSH discovery, cross-layer incident triage, clustered-storage diagnostics, and controlled recovery | field draft |
 
 ## Design rules
 

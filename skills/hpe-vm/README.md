@@ -27,6 +27,8 @@ skills/hpe-vm/
 ## What it enables
 
 - Safe read-only onboarding and capability discovery
+- Web research and evidence analysis for Solutions Architects without target access
+- Version-aware public-source research with clear source, supplied-evidence, hypothesis, and unexecuted-plan boundaries
 - UI, MCP, REST/API, and approved SSH access selection
 - Cross-layer VME incident triage
 - VM, host, storage, network, guest, and application correlation
