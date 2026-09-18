@@ -77,7 +77,7 @@ Look for blocked GFS2 unmount, DLM recovery, or storage I/O rather than assuming
 
 ### Pacemaker is inactive or masked
 
-Do not call that a failure without identifying the cluster layout. On some newer HVM layouts, the Morpheus Agent rather than Pacemaker owns HA decisions while Corosync/DLM/GFS2 remain relevant. Verify the installed-version architecture and expected services.
+Do not call that a failure without identifying the cluster layout. The public VME 9.0.0 layout 1.3 upgrade documentation describes the transition from Pacemaker to Morpheus Agent ownership while Corosync/DLM/GFS2 remain relevant. This is not permission to disable Pacemaker on an 8.x target or proof of the full 9.1/layout 2.0 architecture. Read [version-capabilities.md](version-capabilities.md) for the documented phase/rollback boundary and unresolved versions.
 
 ### `morpheus-morphd` or witness/worker connectivity is interrupted
 

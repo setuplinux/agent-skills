@@ -8,7 +8,9 @@ These are community-authored field guides. They are not official vendor document
 
 | Skill | Purpose | Status |
 |---|---|---|
-| [`skills/hpe-vme`](./skills/hpe-vme/) | Portable VME agent field guide: web research/evidence analysis, safe onboarding, MCP/REST/approved SSH discovery, cross-layer incident triage, clustered-storage diagnostics, and controlled recovery | field draft |
+| [`skills/hpe-vme`](./skills/hpe-vme/) | Version-aware 8.x/9.0/9.1 VME guide: capability discovery, VM/host operations, HKS/Helm/internal app routing, MCP/REST access, clustered-storage triage and approved recovery | field guide; live verification required |
+
+Agent entry point: [hpe-vme/SKILL.md](./skills/hpe-vme/SKILL.md). Share the complete skill directory so linked references and examples remain available.
 
 ## Design rules
 

@@ -29,7 +29,7 @@ Use a read-only or least-privilege role for discovery. The agent should report t
 
 ## MCP
 
-MCP availability and tool catalogs vary by VME build, role, plugins, and configuration. Verify the live appliance rather than hardcoding a catalog.
+VME 9.0.0 release notes document a built-in MCP server and AI-agent read-only mode/RBAC; see [version sources](public-sources.md). Availability and tool catalogs still vary by build, role, plugins and configuration. Verify the live appliance rather than hardcoding a catalog.
 
 1. Confirm product/version/build through a read-only path.
 2. Inspect the appliance UI for configured MCP/AI Services and the advertised service URL.
@@ -55,7 +55,7 @@ A reachable endpoint returning `401` is not an authenticated MCP connection. Str
 
 ## SSH
 
-SSH is a fallback for questions that the control plane cannot answer, not a shortcut around VME authorization. “You may SSH if needed” authorizes only bounded read-only diagnosis when the target hosts and purpose are clear; it does not authorize changes.
+Host access is appropriate for host evidence and the field-observed 9.1 TUI configuration workflow after target verification; it is not a shortcut around VME authorization or managed VM lifecycle. “You may SSH if needed” authorizes only bounded read-only diagnosis when the target hosts and purpose are clear; it does not authorize changes. Read [version-capabilities.md](version-capabilities.md) before choosing `hpe-vm`, `hvmcli` or an older network procedure.
 
 - Confirm each target host and purpose.
 - Check command availability/help before relying on version-specific syntax.
@@ -64,21 +64,17 @@ SSH is a fallback for questions that the control plane cannot answer, not a shor
 - Show runbook commands as if already logged into the host. Do not publish SSH wrappers, key paths, passwords, host loops, or private addresses.
 - SSH commands must remain read-only unless the exact mutation is separately approved.
 
-Useful read-only starting points, when installed and appropriate:
+Start by identifying the tool and available namespaces; no CLI installation is implied:
 
 ```bash
+command -v hvmcli
+hvmcli --help
 hvmcli version
-hvmcli cluster status --json
-hvmcli cluster nodes --list --json
-hvmcli health check --json
-hvmcli vm list --details --json
-hvmcli node show --json
-hvmcli interfaces list --json
-hvmcli storage list --json
-hvmcli storage multipath status --json
 ```
 
-Do not assume these commands exist or have identical flags on every release. Check `hvmcli --help` and subcommand help first.
+Then inspect subcommand help before using reads such as `hvmcli cluster status --json`, `hvmcli vm list --details --json`, `hvmcli storage list --json`, or `hvmcli health check --json`. These are field-observed examples, not a cross-release API contract. Missing tool or changed flags require a version-matched alternative, not guessed syntax. Opening `hvmcli tui` does not make its Save/Apply actions read-only.
+
+For HKS, authorized `Actions > View Kube Config` and browser `Control > kubectl` can remove the need for node SSH; see [HKS access](hks-workloads-and-routing.md). Do not confuse appliance credentials with Kubernetes RBAC.
 
 ## First discovery pass
 

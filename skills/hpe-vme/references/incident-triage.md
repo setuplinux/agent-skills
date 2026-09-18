@@ -56,6 +56,8 @@ If libvirt commands hang after a host reboot, check storage-pool autostart and b
 
 ## Network and guest identity
 
+For 9.1 general-switch Linux bridge observations, the CLI/TUI split and read-only bridge commands, load [version-capabilities.md](version-capabilities.md). For configuration inputs and post-change checks use [operating-recipes.md](operating-recipes.md). Do not apply OVS mutations based only on an installed package/service.
+
 - Do not trust only the UI IP field.
 - Correlate VM placement, domain NIC MAC, network/segment, bridge or virtual switch, DHCP/ARP/router data, guest tools/agent, and console.
 - Test LAN and overlay/VPN reachability separately; one can be healthy while the other is stale or unrouted.
